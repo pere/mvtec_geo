@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>MVTEC</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=dev5ice-width, initial-scale=1.0" />
+    <script src="./js/jquery-3.4.1.js"></script>
+    
+    <script src='./js/d3.min.js'></script>
+    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+    <script src="./js/mapbox-gl-esri-sources.js"></script>
+    
+
+    <script src="./js/lodash_full.js"></script>
+
+    <script src='./js/d3-scale-chromatic.v1.min.js'></script>
+    <!-- <script src='./js/d3-legend_mod.js'></script>  -->
+    <script src='./js/d3-legend.js'></script>
+
+    <script src="./js/materialize_v1.js"></script>
+    <script src="./js/html2canvas.js"></script>
+    <link rel="stylesheet" href="./css/materialize.min.css" />
+
+   
+    <script src='./js/nouislider_dogfalo.js'></script>
+   
+    <link rel="stylesheet" href="./css/nouislider_dogfalo.css" />
+
+    <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+    
+    <script src='./js/busy_load_app.js'></script>
+
+    
+   
+    <link href='./app_css/app_css.css' rel='stylesheet' />
+
+    
+    <link href='./css/busy_load.css' rel='stylesheet' />
+
+
+
+    <link href='./app_css/responsive.css' rel='stylesheet' />
+    <script src="./app_js/external_sources.js"></script>
+    
+    <script src="./app_js/layers.js"></script> 
+    <script src="./app_js/attach_events.js"></script> 
+    
+
+
+</head>
+
+
+<body style="margin:0 ">
+
+
+    <div id="menu" class="">
+        <div class="row">
+            <div class="menu_switcher_container">
+                <form id="baselayers_switcher" action="#">
+
+                    <label>
+                        <input type="checkbox" name="group1" id="esri_satellite" class="filled-in" />
+                        <span>ESRI Satellite</span>
+                        </label>
+
+                    <label>
+                            <input type="checkbox" name="group1" id="terrascope_satellite" class="filled-in" />
+                            <span>Terrascope Sentinel 2 (20m)</span>
+                            </label>
+
+                    <label>
+                        <input checked  type="checkbox" name="group1" id="black_cartodb" class="filled-in" />
+                        <span>Black</span>
+                        </label>
+                    <label>
+                            <input type="checkbox" name="group1" id="white_cartodb" class="filled-in" />
+                            <span>White</span>
+                            </label>
+                    <label>
+                        <input type="checkbox" name="group1" id="maptiler_osm" class="filled-in" />
+                        <span>Openstreet map</span>
+                        </label>
+                    <label>
+                        <input type="checkbox" name="group1" id="maptiler_streets" class="filled-in" />
+                        <span>Maptiler streets</span>
+                        </label>
+                    <label>
+                        <input  type="checkbox" name="group1" id="maptiler_winter" class="filled-in" />
+                        <span>Maptiler Winter</span>
+                        </label>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+ 
+
+    <ul id="slide-out" class="sidenav">      
+
+        <div class="row" style="border: 1px solid grey;padding: 10px;background:#000">
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s5"><a class="active" href="#test1">Layers</a></li>
+                <li class="tab col s7"><a  href="#test2">Analysis</a></li>
+            </ul>
+            </div>
+            <div id="test1">
+                
+                    <div style="background-color: black;">
+        <ul class="collapsibless">
+
+            <li  class="queryable_li active">
+                <div class="card horizontal collapsible-header" tabindex="0">
+                    <div class="card-stacked">
+                    </div>
+                </div>
+
+
+                <div class="collapsible-body" style="display: block;">
+
+                    
+
+                    <ul class="list queryable_layers_list">
+                        <li level="hospitals" class="analysis_layer">
+                            <div class="card e_black">
+                                <div class="card-content">
+                                    <span class="card-title activator">                                                                
+                                            <div class="row valign-wrapper">                                                                                                            
+                                                <div class="col s8">
+                                                    <div class="card_name">Health centres
+                                                    </div>
+                                                                                                
+                                                    </div>
+                                                                                            
+                                                        <div class="col s4 card-actions">                                                       
+                                                                          
+                                                                                <i  class="material-icons highlight layers right">layers</i>     
+                                                                                <i class="material-icons expand_more right">expand_more</i>             
+                                                        </div>                                                                        
+                                            </div>   
+                                    
+                                    </span>
+                                <div class="card-content-content hidden">        
+                                    
+                                    <div class="d3_legend">
+
+                                        <svg class="circles_svg hospitals" height="100" style="display: block;">
+                                            <g class="circles_g" transform="translate(20, 20)" width="181.195">
+                                            <g class="legendCells">
+                                                <g class="cell" transform="translate(0, 0)" code="First">
+                                            
+                                            <path class="swatch" d="M6.90988298942671,0A6.90988298942671,6.90988298942671,0,1,1,-6.90988298942671,0A6.90988298942671,6.90988298942671,0,1,1,6.90988298942671,0" style="fill: rgb(24, 83, 247);"></path><g class="text_container"><text class="label" transform="translate( 16.90988302230835, 5)">With electricity</text></g></g>
+                                            <g class="cell" transform="translate(0, 36)" code="Primary">
+                                            
+                                            <path class="swatch" d="M6.90988298942671,0A6.90988298942671,6.90988298942671,0,1,1,-6.90988298942671,0A6.90988298942671,6.90988298942671,0,1,1,6.90988298942671,0" style="fill: rgb(245, 67, 12);"></path><g class="text_container"><text class="label" transform="translate( 16.90988302230835, 5)">Without electricity</text></g></g><g class="cell" transform="translate(0, 72)" code="Secondary">
+                                            </g>
+                                            </svg>
+                                    </div>
+                                </div>
+
+
+                                </div>
+                            </div>
+                
+
+                        </li>
+
+                        <li level="ghs_africa_250m_bigger_1_5" class="analysis_layer">
+                            <div class="card e_black">
+                                <div class="card-content">
+                                    <span class="card-title activator">                                                                
+                                            <div class="row valign-wrapper">                                                                                                            
+                                                <div class="col s8">
+                                                    <div class="card_name">Population
+                                                    </div>
+                                                                                                
+                                                    </div>
+                                                                                            
+                                                        <div class="col s4 card-actions">                                                       
+                                                                          
+                                                                                <i  class="material-icons highlight layers right">layers</i>     
+                                                                                <i class="material-icons expand_more right">expand_more</i>             
+                                                        </div>    
+                                                                                                                         
+                                            </div>                 
+
+                                    </span>
+                                    
+                                    <div class="card-content-content hidden">     
+                                        <div class="row">
+                                            <div class="description">Estimated habitants/250m</div>
+                                            <div class="raster_scale_container raster_legend_svg_container" style="display: block;">
+                                                <svg class="raster_legend_svg orange_purple_svg" height="80px" style="width: 268.594px;"><defs><linearGradient id="svgGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="1%" stop-color="#eef78d"></stop><stop offset="4%" stop-color="#ff9800"></stop><stop offset="4.1%" stop-color="#b2f705"></stop><stop offset="24.99%" stop-color="#4caf50"></stop><stop offset="25%" stop-color="#31f7f7"></stop><stop offset="59.99%" stop-color="#6716f2"></stop><stop offset="60%" stop-color="#FF1764"></stop><stop offset="94.99%" stop-color="#57266D"></stop></linearGradient></defs><rect class="rect_legend" width="268.594" height="20" fill="url(#svgGradient)"></rect><g class="legendWrapper"><g width="268.594" height="95" class="axis" transform="translate(-15, 42)" fill="none" font-size="10" font-family="sans-serif" text-anchor="middle"><path class="domain" stroke="currentColor" d="M3.18594,6V0.5H255.6643V6"></path><g class="tick" opacity="1" transform="translate(3.18594,0)" style="opacity: 1;"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em" dx="1.5em" transform="rotate(-65)" style="text-anchor: end;">2</text></g><g class="tick" opacity="1" transform="translate(11.512353999999998,0)" style="opacity: 1;"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em" dx="1.5em" transform="rotate(-65)" style="text-anchor: end;">50</text></g><g class="tick" opacity="1" transform="translate(67.6485,0)" style="opacity: 1;"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em" dx="1.5em" transform="rotate(-65)" style="text-anchor: end;">300</text></g><g class="tick" opacity="1" transform="translate(161.6564,0)" style="opacity: 1;"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em" dx="1.5em" transform="rotate(-65)" style="text-anchor: end;">1,500</text></g><g class="tick" opacity="1" transform="translate(255.6643,0)" style="opacity: 1;"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em" dx="1.5em" transform="rotate(-65)" style="text-anchor: end;">300,000</text></g></g></g></svg>
+                                            </div>
+                                        </div>  
+                                    </div>
+
+
+                                </div>
+                            </div>
+                
+
+                        </li>
+
+                        <li level="electric_grid" class="analysis_layer">
+                            <div class="card e_black">
+                                <div class="card-content">
+                                    <span class="card-title activator">                                                                
+                                            <div class="row valign-wrapper">                                                                                                            
+                                                <div class="col s8">
+                                                    <div class="card_name">Electric grid
+                                                    </div>
+                                                                                                
+                                                    </div>
+                                                                                            
+                                                        <div class="col s4 card-actions">                                                       
+                                                                          
+                                                                                <i  class="material-icons highlight layers right">layers</i>     
+                                                                                <i class="material-icons expand_more right">expand_more</i>             
+                                                        </div>                                                                        
+                                            </div>                                                
+                                    </span>
+
+
+                                </div>
+                            </div>
+                
+
+                        </li>
+
+
+                </ul>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    
+    <!--     <h2>TEST1</h2> -->
+    </div>
+    <div id="test2">
+        <div style="background-color: black;">
+            <div style="margin: 15px;">
+                <span class="instructions">Use this tool to establish priorities for the deployment of health facilities in the region
+
+                </span>
+
+                <div class="sel_country">
+                   <div class="instructions">
+                    Select a country
+                   </div> 
+                   <div code="68" class="btn btn-small">D.R. Congo</div>
+                   <div code="152" class="btn btn-small">Malawi</div>
+                   <div code="94" class="btn btn-small">Ghana</div>
+                </div>
+                <div class="voronois_scores_container">
+                <span class="instructions">Click over a polygon to see its data
+                    
+                </span>
+                <div class="scores_scale">
+                    <svg class="scores_svg">
+                        </svg>
+                        <span style="color:gold" class="center-align">Score</span>
+                    <div class="min_max_avg">
+                        
+                        <div class="min">0</div>
+                        <div class="max">100</div>
+                        <div class="avg">50</div>
+
+                        
+                    </div>
+                </div>
+                <span class="hide_voronois">Hide voronoi polygons</span>
+            </div>
+            </div>
+            
+            <ul class="collection" style="background-color: black;">
+
+                <li class="collection-item pop_sum"><div>Sum population</div>
+                  
+                    <div style="margin-top:5px" class="row materialized_slider_container">
+                                                                <div style="padding-right: 0px;">
+
+                                                                    <div class="hover-val">1</div>
+                                                                    <div class="slider pop_sum_slider" id="pop_sum_slider"></div>
+                                                                </div>
+                    <span class="instructions">The more population, the more score</span>                                                                
+                    </div>
+                  
+                </li>
+                
+                <!-- <li class="collection-item pop_count"><div>Counted population</div> -->
+                  <!--  -->
+                    <!-- <div style="margin-top:5px" class="row materialized_slider_container"> -->
+                                                                <!-- <div style="padding-right: 0px;"> -->
+<!--  -->
+                                                                    <!-- <div class="hover-val">your value</div> -->
+                                                                    <!-- <div class="slider pop_slider" id="pop_slider"></div> -->
+                                                                <!-- </div> -->
+                    <!-- </div> -->
+                  <!--  -->
+                <!-- </li> -->
+                <li class="collection-item dist_elect"><div>Distance to grid</div>
+                    
+                        <div style="margin-top:5px" class="row materialized_slider_container">
+                                                                    <div style="padding-right: 0px;">
+    
+                                                                        <div class="hover-val">1</div>
+                                                                        <div class="slider dist_elect_slider" id="dist_elect_slider"></div>
+                                                                    </div>
+                                                                </div>
+                        <span class="instructions">The more far you are from electric grid, the more score</span>
+                </li>
+                <li class="collection-item elec_length">
+                    <div>Km. of grid</div>
+                    
+                    <div style="margin-top:5px" class="row materialized_slider_container">
+                        <div style="padding-right: 0px;">
+
+                            <div class="hover-val">1</div>
+                            <div class="slider elec_length_slider" id="elec_length_slider"></div>
+                        </div>
+                    </div>
+                <span class="instructions">The more electric grid inside the polygon, the more score</span>    
+                
+            </li>
+                
+              </ul>
+    </div>
+    </div>
+        </div>
+
+    </ul>
+
+    <div id="map" style="width: 100vw; height: 100vh;">
+        <!-- <div class='info'>My alert</div> -->
+    </div>
+
+
+
+    <script>
+        // $.busyLoadSetup({
+            // spinner: "accordion",
+            // animation: 'fade',
+            // background: "black",
+            // color: "#ff9800"
+// 
+        // });
+    
+        $('.collapsible').collapsible();
+        $('.busy-load-container').show()
+        // $("body").busyLoad("show");
+        //var flying = false;
+
+        var this_app = {
+            interpol_name: 'interpolateWarm',
+            flying:false,
+            uniqueFeatures: [],
+            countries:
+            [
+            {
+                    name: 'RD Congo',
+                    adm0_code: 68,
+                    center: [22.237186, -2.319713],
+                    zoom: 5
+            },
+            {
+                    name: 'Malawi',
+                    adm0_code: 152,
+                    center: [34.319057, -13.775900],
+                    zoom: 6
+
+                },
+                {
+                    name: 'Ghana',
+                    adm0_code: 94,
+                    
+                    center: [ -1.5703321,8.2305],
+                    zoom: 6.11
+
+                }
+            ],
+            query_mode: 'click',
+            data:[{"code":68,"data":[{"param":"pop_count","max":10,"min":0,"avg":0.34501},{"param":"pop_sum","max":10,"min":0,"avg":0.14438},{"param":"elec_length","max":10,"min":0,"avg":0.01796},{"param":"dist_elect","max":10,"min":0.04121,"avg":1.47331}]},{"code":152,"data":[{"param":"pop_count","max":148.45652,"min":0,"avg":27.16195},{"param":"pop_sum","max":10,"min":0,"avg":2.39844},{"param":"elec_length","max":10,"min":0,"avg":0.38308},{"param":"dist_elect","max":8.5119,"min":0.79887,"avg":3.06626}]}],
+            
+            adm0_code: null,
+            scores:[
+                // {
+                    // param:'pop_count',
+                    // value:1
+                // },
+                {
+                    param:'pop_sum',
+                    value:1
+                },
+                {
+                    param:'dist_elect',
+                    value:1
+                },
+                {
+                    param:'elec_length',
+                    value:1
+                }
+            ]
+                //tza: 257, cod 68
+                // first:true
+
+        };
+        this_app.throttle = function(fn, threshhold, scope) {
+            threshhold || (threshhold = 1000);
+            var last,
+                deferTimer;
+            return function() {
+                var context = scope || this;
+
+                var now = +new Date,
+                    args = arguments;
+                if (last && now < last + threshhold) {
+                    // hold on to it
+                    clearTimeout(deferTimer);
+                    deferTimer = setTimeout(function() {
+                        last = now;
+                        fn.apply(context, args);
+                    }, threshhold);
+                } else {
+                    last = now;
+                    fn.apply(context, args);
+                }
+            };
+        }
+
+        
+       
+     
+       
+        var map = (window.map = new maplibregl.Map({
+            container: 'map',
+            /*
+            center: [18.83,-4.577],
+            zoom: 4.55,
+            */
+            center: [8.4, 3.2],
+            zoom: 2.5,
+            style: {
+                "glyphs": "./font/{fontstack}/{range}.pbf",
+                "version": 8,
+                "sources": {
+                    "gaul_level_0_line_source": {
+                        "type": "vector",
+                        "tiles": [
+                            "https://pere.gis-ninja.eu/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=topp:gaul_0_simplified&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/vnd.mapbox-vector-tile&TILECOL={x}&TILEROW={y}"
+                        ],
+                    }
+                },
+                "layers": [{
+                    "id": "gaul_0_simple",
+                    "source": "gaul_level_0_line_source",
+                    "source-layer": "gaul_0_simplified",
+                    "type": "fill",
+                    // "minzoom": 4,
+                    // "maxzoom": 6,
+                    'layout': {
+                        'visibility': 'visible'
+
+                    },
+                    'paint': {
+                        "fill-color": "#131315",
+                        "fill-outline-color": "#87989c",
+                        "fill-opacity": 0
+
+                    }
+                }]
+            },
+            //otherwise html2canvas will not work!!
+            preserveDrawingBuffer: true,
+            antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
+            }));
+
+            this_app.feature_popup = new maplibregl.Popup({
+            closeButton: false,
+            closeOnClick: true,
+            // className: 'region_map_popup',
+            className: 'feature_map_popup',
+            //offset: [20, -20]
+            offset: 15
+                // offset: {
+                //     'bottom': [0, -20],
+                //     'top': [0, 15],
+                //     'top-left': [0, 0], //[linearOffset, (markerHeight - markerRadius - linearOffset) * -1],
+                //     'top-right': [0, 0], //[-linearOffset, (markerHeight - markerRadius - linearOffset) * -1],
+
+            // }
+        });
+        
+       // map.addControl(new mapboxgl.NavigationControl());
+
+        map.getCanvas().style.cursor = 'default';
+
+
+
+        // map.on('idle', function() {
+           
+            // console.warn(arguments)
+            // console.log('idddle, all loaded?')
+        // })
+
+
+        map.on('load', function() {
+
+            
+            map.addControl(new DualScaleControl({
+        maxWidth: 280,
+        minWidth: 1500
+
+    }), 'bottom-right');
+
+            class map_legend_control2 {
+        onAdd(map) {
+            this.map = map;
+            this.container = document.createElement('div');
+            //this.container.className = 'click_country_control_container';
+            this.container.className = 'map_popup_control_container';
+
+            return this.container;
+        }
+        onRemove() {
+            this.container.parentNode.removeChild(this.container);
+            this.map = undefined;
+        }
+    }
+    var map_popup_control_container_ctrl = new map_legend_control2();
+    map.addControl(map_popup_control_container_ctrl, 'bottom-right');
+
+
+    //holding user select list
+    class map_legend_control {
+        onAdd(map) {
+            this.map = map;
+            this.container = document.createElement('div');
+            //this.container.className = 'click_country_control_container';
+            this.container.className = 'map_legend_control_container';
+
+            return this.container;
+        }
+        onRemove() {
+            this.container.parentNode.removeChild(this.container);
+            this.map = undefined;
+        }
+    }
+    var legend_control_ctrl = new map_legend_control();
+    map.addControl(legend_control_ctrl, 'bottom-right');
+    $('.map_legend_control_container').html('<h3>Scores</h3><div>Click a category to filter</div><div class="collection"></div>')
+    
+
+
+            add_external_sources();
+            var url = 'https://geospatial.jrc.ec.europa.eu/geoserver/hotspots/wms?service=WMS';
+          
+            map.addSource("electric_grid_source", {
+                "type": "vector",               
+                "tiles": ["https://geospatial.jrc.ec.europa.eu/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=hotspots:electric_grid_new_gaul&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/vnd.mapbox-vector-tile&TILECOL={x}&TILEROW={y}"]
+            });
+
+            map.addSource("hospitals_source", {
+                "type": "vector",
+                //hc_benin
+                "tiles": ["https://pere.gis-ninja.eu/geoserver/gwc/service/wmts?layer=mvtec:health_centres&tilematrixset=EPSG:900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=application/x-protobuf;type=mapbox-vector&TileMatrix=EPSG:900913:{z}&TileCol={x}&TileRow={y}"]
+
+            });
+
+            map.addSource("voronois_data_source", {
+                "type": "vector",                
+                "tiles": ["https://pere.gis-ninja.eu/geoserver/gwc/service/wmts?layer=mvtec:voronois_all&tilematrixset=EPSG:900913&Service=WMTS&Request=GetTile&Version=1.0.0&Format=application/x-protobuf;type=mapbox-vector&TileMatrix=EPSG:900913:{z}&TileCol={x}&TileRow={y}"]
+            });
+
+            map.addSource('ghs_africa_250m_bigger_1_5_source', {
+                'type': 'raster',
+                'tiles': [                        
+                        'https://geospatial.jrc.ec.europa.eu/geoserver/wms?service=WMS&version=1.1.0&request=GetMap&layers=hotspots:pop_ghs_bigger_1_5_4326&STYLES=hotspots:ghs_250m_new_legend&transparent=true&bbox={bbox-epsg-3857}&width=768&height=585&srs=EPSG:3857&format=image/png'
+
+                    ]
+                    //'tileSize': 256
+            });
+          
+            this_app["voronois_data"] = {
+                "id": "voronois_data",
+                "group": 0,
+                "source": "voronois_data_source",
+                "source-layer": "voronois_all",
+                "type": "fill",
+
+                'layout': {
+                    'visibility': 'visible'
+
+                },
+                'paint': {
+                    // 'fill-outline-color':'#747375',
+                    "fill-color": '#03a9f4',
+                    "fill-opacity": 0
+
+
+                },
+               // "filter": ['all', ['==', 'adm0_code', this_app.adm_0_code]]
+                    //"filter": ['all', ['=', 'adm_0_id', 'COD']]
+                    //  filter: ['all', ['>', 'area', 40],['!=', 'status', 'Actif']]
+                    //  filter:['all', [">", ["get", 'area'], 40]]
+            };
+
+            this_app["voronois_data_line"] = {
+                "id": "voronois_data_line",                
+                "source": "voronois_data_source",
+                //"source-layer": "slumaps_" + city + "_city_scale_new",
+                "source-layer": "voronois_all",
+                "type": "line",
+
+                'layout': {
+                    'visibility': 'none'
+
+                },
+
+                'paint': {
+                    'line-width': 1,
+                    'line-opacity': 
+                    [
+                        "interpolate", ['linear'],
+                        ["zoom"],
+
+                        6, 0.4,
+                        15, 1
+                    ],
+                    //  [
+                    //     "interpolate", ['exponential', 2],
+                    //     ["zoom"],
+                    //     10, 0,
+                    //     15, .5
+                    // ],
+                    // Use a get expression (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-get)
+                    // to set the line-color to a feature property value.
+                    //greyish
+                    'line-color': '#dad4d4'
+                },
+              //  "filter": ['all', ['==', 'adm0_code', this_app.adm_0_code]]
+            };
+
+            
+ 
+            //map.addLayer(this_app.maptiler_winter)
+            map.addLayer(this_app.black_cartodb)
+
+            this_app.active_blayer = 'black_cartodb';
+            
+            map.addLayer(this_app.voronois_data);
+            map.addLayer(this_app.voronois_data_line);
+          function mousemove_ev(e) {
+
+            // if (!this_app.query_mode || this_app.query_mode !== 'mouseover')
+            // return false;
+            // console.log(e);
+// 
+
+            var features = map.queryRenderedFeatures(e.point, {
+                layers: ['voronois_data']
+            });
+            if (features.length > 0) {
+                console.warn(features[0].properties)
+            }
+        }
+        function get_score(param)
+        {
+            
+        }
+            map.on('mousemove', function(e) {
+
+                //this_app.throttle(change_opacity(e.target.value, layer_name, false), 300)
+               //this_app.throttle(mousemove_ev(e), 1500)
+            })
+
+            function mouseclick_ev(e) {
+  
+
+                var features = map.queryRenderedFeatures(e.point, {
+                    layers: ['voronois_data']
+                });
+
+
+                if (features.length == 0) {
+                    map.getCanvas().style.cursor = 'default';
+                    $('.feature_map_popup').hide();
+                } else {
+
+                    var feature = features[0];
+                    console.warn(feature)
+                    if (feature) {
+
+                        var fields = [
+                            { code: 'pop_sum', label: 'Sum population' },
+                            { code: 'dist_elect', label: 'Distance to grid' },
+                            { code: 'elec_length', label: 'Km of grid' }
+                        ]
+
+
+                        var html = '<div class="l_title"><span> <i class="material-icons close_popup right">close</i></span></div>';
+                        var total_score=0;
+                        html += fields.map((d) => {
+
+                            var code=d.code;
+                            var score_code=d.code+'_score';
+                            var this_score=this_app.scores.filter(d=>d.param==code)[0].value;
+                            total_score+=feature.properties[score_code]*this_score;
+                            
+                            return '<div>'+d.label + ' : ' + feature.properties[code]+'<span class="score center-align">'+
+                                (feature.properties[score_code]*this_score).toFixed(3)+'</span>'
+                                +'</div>';
+                        }).join('</hr>');
+                        console.warn(total_score)
+
+                        console.log(this_app)
+                        var this_bucket=this_app.buckets.filter(d=>d.ids.indexOf(feature.properties.gid)>-1)[0];
+                        console.log(this_bucket);
+                        html+='<div class="total_score">Total score  <span style="font-size:1.5rem;color:'+this_bucket.color+'">'+total_score.toFixed(3)+'</span>'
+                            +'<div class="score_label">'+this_bucket.label+'</div></div>';
+
+                        this_app.feature_popup.html = html;
+
+                        if (!this_app.feature_popup.html) {
+                            map.getCanvas().style.cursor = 'default';
+                            $('.feature_map_popup').hide();
+                            this_app.feature_popup.html = null;
+                            return false
+                        }
+                        var latlng = e.lngLat;
+
+                        $('.feature_map_popup').show();
+                        if (this_app.query_mode == 'click') {
+                            setTimeout(function() {
+                                this_app.feature_popup.setLngLat(latlng)
+                                this_app.feature_popup.setHTML(this_app.feature_popup.html).addTo(map);
+
+                                $('.feature_map_popup').show();
+                            }, 800)
+                        }
+                    }
+                }
+
+            }
+            map.on('click', function(e) {
+                mouseclick_ev(e)
+                //this_app.throttle(mousemove_ev(e), 1500)
+            })
+        })
+
+        
+
+
+        var loaded = false;
+
+       
+
+       
+    </script>
+    <script src='./js/mapbox-gl-dual-scale-control.js'></script>
+
+</body>
+
+</html>
