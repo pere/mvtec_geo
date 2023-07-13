@@ -3,7 +3,7 @@ Most of the health centres (HC) in sub-saharian Africa have no access to electri
 
 The Clean Energy Access tool (https://africa-knowledge-platform.ec.europa.eu/energy_tool) provides geographic layers to explore, interact and analyse, in order to get some insights about in which areas the installation of photovoltaic systems should be a priority
 
-The developed tool here (https://pere.gis-ninja.eu/mvtec/index_dev.html) provides a new interactive methodology using some of this data:
+The developed tool here (https://pere.gis-ninja.eu/mvtec/) provides a new interactive methodology using some of this data:
 -Health centres
 -Population
 -Electric grid
